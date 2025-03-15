@@ -48,23 +48,16 @@ public class UserDAO {
         }
     }
 
-    public static boolean register(User user) {
+    public static boolean addUser(User user) {
         DBContext db = DBContext.getInstance();
-        try {
-            String sql = """
-                     INSERT INTO Users 
-                     (FullName, Email, Password, Role, Phone, Address) 
-                     VALUES
-                     (?, ?, ?, ?, ?, ?)
-        """;
-            PreparedStatement statement = db.getConnection().prepareStatement(sql);
-
-            statement.setString(1, user.getFullName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getRole());
-            statement.setString(5, user.getPhone());
-            statement.setString(6, user.getAddress());
+        String sql = "INSERT INTO Users (FullName, Email, Password, Role, Phone, Address) VALUES (?,?,?,?,?,?)";
+        try (PreparedStatement statement = db.getConnection().prepareStatement(sql)) {
+            statement.setString(1,user.getFullName());
+            statement.setString(2,user.getEmail());
+            statement.setString(3,user.getPassword());
+            statement.setString(4,user.getRole());
+            statement.setString(5,user.getPhone());
+            statement.setString(6,user.getAddress());
 
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
@@ -76,18 +69,16 @@ public class UserDAO {
 
     public static boolean isEmailExists(String email) {
         DBContext db = DBContext.getInstance();
-        boolean exists = false;
-        try {
-
-            String sql = "SELECT COUNT(*) FROM Users WHERE Email = ?";
-            PreparedStatement statement = db.getConnection().prepareStatement(sql); // (3)
-            ResultSet rs = statement.executeQuery();
+        String sql = "SELECT COUNT(*) FROM Users WHERE Email = ?";
+        try (PreparedStatement statement = db.getConnection().prepareStatement(sql)) {
             statement.setString(1, email);
-            if (rs.next() && rs.getInt(1) > 0) {
-                exists = true;
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Trả về true nếu email đã tồn tại
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return exists;
+        return false;
     }
 }

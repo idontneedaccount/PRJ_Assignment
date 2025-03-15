@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="login-container">
-            <form action="Login" method="POST">
+            <form action="${pageContext.request.contextPath}/Login" method="POST">
                 <h2>Đăng Nhập Hệ Thống</h2>
                 <div class="form-group">
                     <label for="email">Email Đăng Nhập</label>
@@ -30,6 +30,9 @@
                     </div>
                 </c:if>
             </form>
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="${pageContext.request.contextPath}/view/register.jsp">Tạo tài khoản mới</a>
+            </div>
         </div>
     </body>
 </html>
