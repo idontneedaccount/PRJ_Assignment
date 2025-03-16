@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="allowlib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/allowlib/sqljdbc42.jar!/" />
+      <root url="jar://$PROJECT_DIR$/allowlib/jaxb-api-2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

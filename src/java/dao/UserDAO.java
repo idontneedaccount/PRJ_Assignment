@@ -30,6 +30,7 @@ public class UserDAO {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 User user = new User(
+                        rs.getInt("UserID"),
                         rs.getString("FullName"),
                         rs.getString("Email"),
                         rs.getString("Password"),
@@ -58,11 +59,10 @@ public class UserDAO {
             statement.setString(4,user.getRole());
             statement.setString(5,user.getPhone());
             statement.setString(6,user.getAddress());
-
+            
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -74,10 +74,9 @@ public class UserDAO {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1) > 0; // Trả về true nếu email đã tồn tại
+                return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return false;
     }

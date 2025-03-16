@@ -35,16 +35,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="role">Vai Trò</label>
-                    <select id="role" name="role" required>
-                        <option value="Police">Cảnh Sát</option>
-                        <option value="Station">Trạm Đăng Kiểm</option>
-                        <option value="Inspector">Nhân Viên Đăng Kiểm</option>
-                        <option value="Owner">Chủ Xe</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="phone">Số Điện Thoại</label>
                     <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
                 </div>
@@ -56,15 +46,13 @@
 
                 <button type="submit">Đăng Ký</button>
 
-                <c:if test="${not empty error}">
-                    <div class="error-message" style="color: red; text-align: center;">
-                        ${error}
-                    </div>
-                </c:if>
+                <div class="error-message" style="color: red; text-align: center;">
+                    <c:out value="${error}" />
+                </div>
             </form>
 
             <div style="text-align: center; margin-top: 10px;">
-                <a href="${pageContext.request.contextPath}/view/login.jsp">Đã có tài khoản? Đăng nhập</a>
+                <a href="${pageContext.request.contextPath}/Login">Đã có tài khoản? Đăng nhập</a>
             </div>
         </div>
     </body>

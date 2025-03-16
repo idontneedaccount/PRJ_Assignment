@@ -8,25 +8,44 @@ package model;
  *
  * @author PC
  */
-public class Vehicles {
+public class Vehicle {
 
+    int vehicleID;
     int ownerID;
     String plateNumber;
     String brand;
     String model;
     int manufactureYear;
-    int engineNumber;
+    String engineNumber;
 
-    public Vehicles() {
+    public Vehicle() {
     }
 
-    public Vehicles(int ownerID, String plateNumber, String brand, String model, int manufactureYear, int engineNumber) {
+    public Vehicle(int vehicleID, String plateNumber, String brand, String model, int manufactureYear, String engineNumber) {
+        this.vehicleID = vehicleID;
+        this.plateNumber = plateNumber;
+        this.brand = brand;
+        this.model = model;
+        this.manufactureYear = manufactureYear;
+        this.engineNumber = engineNumber;
+    }
+
+    public Vehicle(int vehicleID, int ownerID, String plateNumber, String brand, String model, int manufactureYear, String engineNumber) {
+        this.vehicleID = vehicleID;
         this.ownerID = ownerID;
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.model = model;
         this.manufactureYear = manufactureYear;
         this.engineNumber = engineNumber;
+    }
+
+    public int getVehicleID() {
+        return vehicleID;
+    }
+
+    public void setVehicleID(int vehicleID) {
+        this.vehicleID = vehicleID;
     }
 
     public int getOwnerID() {
@@ -69,12 +88,12 @@ public class Vehicles {
         this.manufactureYear = manufactureYear;
     }
 
-    public int getEngineNumber() {
+    public String getEngineNumber() {
         return engineNumber;
     }
 
-    public void setEngineNumber(int engineNumber) {
+    public void setEngineNumber(String engineNumber) {
         this.engineNumber = engineNumber;
     }
-    
+
 }

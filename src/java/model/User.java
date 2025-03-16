@@ -10,6 +10,7 @@ package model;
  */
 public class User {
 
+    int userID;
     String fullName;
     String email;
     String password;
@@ -27,6 +28,25 @@ public class User {
         this.role = role;
         this.phone = phone;
         this.address = address;
+    }
+
+    
+    public User(int userID, String fullName, String email, String password, String role, String phone, String address) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getFullName() {
@@ -54,17 +74,7 @@ public class User {
     }
 
     public String getRole() {
-        if (role.equals("Owner")) {
-            return "Chủ phương tiện";
-        } else if (role.equals("Inspector")) {
-            return "Công nhân";
-        } else if (role.equals("Station")) {
-            return "Cơ sở kiểm định";
-        } else if (role.equals("Police")) {
-            return "Cảnh sát";
-        } else {
-            return "Lỗi";
-        }
+        return role;
     }
 
     public void setRole(String role) {

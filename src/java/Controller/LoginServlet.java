@@ -64,8 +64,14 @@ public class LoginServlet extends HttpServlet {
         if (user == null) {
             RequestDispatcher rs = request.getRequestDispatcher("view/login.jsp");
             rs.forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/view/home.jsp");
+        } else if (user.getRole().equalsIgnoreCase("Owner")) {
+            response.sendRedirect("view/owner/dashboard.jsp");
+        } else if (user.getRole().equalsIgnoreCase("Police")) {
+            response.sendRedirect("view/police/dashboard.jsp");
+        } else if (user.getRole().equalsIgnoreCase("Station")) {
+            response.sendRedirect("view/station/dashboard.jsp");
+        } else if (user.getRole().equalsIgnoreCase("Inspector")) {
+            response.sendRedirect("view/inspector/dashboard.jsp");
         }
     }
 
@@ -82,15 +88,33 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         User user = UserDAO.getUserByEmailAndPassword(email, password);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("view/home.jsp");
+            session.setAttribute("userID", user.getUserID());
+            System.out.println(user.getUserID());
+            session.setAttribute("role", user.getRole());
+            if (user.getRole().equalsIgnoreCase("owner")) {
+                session.setAttribute("user", user);
+                response.sendRedirect("view/owner/dashboard.jsp");
+            } else if (user.getRole().equalsIgnoreCase("police")) {
+                session.setAttribute("user", user);
+                response.sendRedirect("view/police/dashboard.jsp");
+            } else if (user.getRole().equalsIgnoreCase("station")) {
+                session.setAttribute("user", user);
+                response.sendRedirect("view/station/dashboard.jsp");
+            } else if (user.getRole().equalsIgnoreCase("inspector")) {
+                session.setAttribute("user", user);
+                response.sendRedirect("view/inspector/dashboard.jsp");
+            } else {
+                session.setAttribute("user", user);
+                response.sendRedirect("view/admin/dashboard.jsp");
+            }
         } else {
             request.setAttribute("error", "Sai email hoặc mật khẩu!");
-            request.getRequestDispatcher("view/login.jsp").forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

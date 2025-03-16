@@ -5,6 +5,7 @@
 package Controller;
 
 import dao.UserDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -71,47 +72,42 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullName = request.getParameter("fullName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
-        String role = request.getParameter("role").trim();
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
 
-        System.out.println("Full Name: " + fullName);
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
-        System.out.println("Role: " + role);
-        System.out.println("Phone: " + phone);
-        System.out.println("Address: " + address);
+            try {
+                String fullName = request.getParameter("fullName");
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                String confirmPassword = request.getParameter("confirmPassword");
+                String role = "Owner";
+                String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
 
-        if (!password.equals(confirmPassword)) {
-            request.setAttribute("error", "Mật khẩu và xác nhận mật khẩu không khớp!");
-            request.getRequestDispatcher("/view/register.jsp").forward(request, response);
-            return;
-        }
+                if (!password.equals(confirmPassword)) {
+                    request.setAttribute("error", "Mật khẩu và xác nhận mật khẩu không khớp!");
+                } else {
+                    User user = new User(fullName, email, password, role, phone, address);
 
-        // Tạo đối tượng User
-        User user = new User();
-        user.setFullName(fullName);
-        user.setEmail(email);
-        user.setPassword(password); // Lưu ý: Nên hash mật khẩu trước khi lưu
-        user.setRole(role);
-        user.setPhone(phone);
-        user.setAddress(address);
+                    if (UserDAO.isEmailExists(email)) {
+                        request.setAttribute("error", "Email đã được sử dụng. Vui lòng chọn email khác!");
+                    } else {
+                        boolean success = UserDAO.addUser(user);
+                        if (success) {
+                            response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+                        } else {
+                            request.setAttribute("error", "Đăng ký thất bại. Vui lòng thử lại!");
+                            request.getRequestDispatcher("/view/register.jsp").forward(request, response);
+                        }
+                    }
+                }
 
-        // Thêm người dùng vào cơ sở dữ liệu
-        boolean success = UserDAO.addUser(user);
-        System.out.println("Success: " + success); // Debug: In ra kết quả
-
-        if (success) {
-            // Đăng ký thành công, chuyển hướng đến trang đăng nhập
-            response.sendRedirect(request.getContextPath() + "/view/login.jsp");
-        } else {
-            // Đăng ký thất bại, hiển thị thông báo lỗi
-            request.setAttribute("error", "Đăng ký thất bại. Vui lòng thử lại!");
-            request.getRequestDispatcher("/view/register.jsp").forward(request, response);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/view/register.jsp");
+                dispatcher.forward(request, response);
+            } catch (Exception e) {
+                request.setAttribute("error", "Đã xảy ra lỗi: " + e.getMessage());
+                request.getRequestDispatcher("/view/register.jsp").forward(request, response);
+            }
         }
     }
 
