@@ -117,7 +117,7 @@ public class VehicleDAO {
         }
     }
 
-    public static boolean addVehicle(Vehicle vehicle) {
+    public static Vehicle addVehicle(Vehicle vehicle) {
         DBContext db = DBContext.getInstance();
         String sql = "INSERT INTO Vehicles (OwnerID, PlateNumber, Brand, Model, ManufactureYear, EngineNumber) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -131,14 +131,13 @@ public class VehicleDAO {
             statement.setString(6, vehicle.getEngineNumber());
 
             int rs = statement.executeUpdate();
-            return rs > 0;
-
+            return vehicle;
         } catch (SQLException e) {
             System.err.println("SQL Error: " + e.getMessage());
-            return false;
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

@@ -87,18 +87,16 @@ public class VehiclesServlet extends HttpServlet {
                 RequestDispatcher rs = request.getRequestDispatcher("editVehicle.jsp");
                 rs.forward(request, response);
             } else if (action.equals("delete")) {
-                String vehicleID = request.getParameter("id");
-                System.out.println(vehicleID);
-                boolean success = VehicleDAO.deleteVehicle(vehicleID);
-                try (PrintWriter out = response.getWriter()) {
-                    if (!success) {
-                        out.println("Deleting vehicle failed!");
-                    } else {
-                        out.println("<h3>Deleted vehicle</h3>");
-                        out.println("<h4>Vehicle ID: " + vehicleID + "</h4>");
-                    }
-                    out.println("<a href='Vehicles?action=list'>Back to List</a>");
-                }
+                int vehicleID = Integer.parseInt(request.getParameter("id"));
+
+                Vehicle vehicle = VehicleDAO.getVehicleById(vehicleID);
+                String plateNumber = request.getParameter("idplate");
+                boolean success = VehicleDAO.deleteVehicle(plateNumber);
+                request.setAttribute("success", success);
+                request.setAttribute("vehicle", vehicle);
+                // Điều hướng đến deleteResult.jsp
+                RequestDispatcher dispatcher = request.getRequestDispatcher("deleteResult.jsp");
+                dispatcher.forward(request, response);
             }
         }
     }
@@ -119,20 +117,15 @@ public class VehiclesServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int ownerID = (int) session.getAttribute("userID");
 
-        System.out.println(ownerID);
-
         if (action.equals("add")) {
             String plateNumber = request.getParameter("plateNumber");
             String brand = request.getParameter("brand");
             String model = request.getParameter("model");
             int manufactureYear = Integer.parseInt(request.getParameter("manufactureYear"));
             String engineNumber = request.getParameter("engineNumber");
-
             Vehicle vehicle = new Vehicle(ownerID, plateNumber, brand, model, manufactureYear, engineNumber);
-            boolean success = VehicleDAO.addVehicle(vehicle);
-            if (success) {
-                request.setAttribute("vehicle", vehicle);
-            }
+            vehicle = VehicleDAO.addVehicle(vehicle);
+            request.setAttribute("vehicle", vehicle);
             RequestDispatcher rs = request.getRequestDispatcher("addVehicleResult.jsp");
             rs.forward(request, response);
         } else if (action.equals("edit")) {
@@ -142,7 +135,7 @@ public class VehiclesServlet extends HttpServlet {
             int manufactureYear = Integer.parseInt(request.getParameter("manufactureYear"));
             String engineNumber = request.getParameter("engineNumber");
             int vehicleID = Integer.parseInt(request.getParameter("vehicleID"));
-            Vehicle vehicle = new Vehicle(vehicleID, plateNumber, brand, model, manufactureYear, engineNumber);
+            Vehicle vehicle = new Vehicle(vehicleID, ownerID, plateNumber, brand, model, manufactureYear, engineNumber);
             boolean success = VehicleDAO.updateVehicle(vehicle);
             request.setAttribute("vehicle", vehicle);
             RequestDispatcher rs = request.getRequestDispatcher("editVehicleResult.jsp");

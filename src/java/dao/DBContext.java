@@ -21,6 +21,19 @@ public class DBContext {
     }
 
     public Connection getConnection() {
+
+        try {
+            if (connection == null || connection.isClosed()) {
+                String user = "sa";
+                String password = "123";
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=PRJ_Assignment;encrypt=false";
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                connection = DriverManager.getConnection(url, user, password);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            connection = null;
+        }
         return connection;
     }
 

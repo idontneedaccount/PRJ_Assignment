@@ -51,7 +51,7 @@
                         <td></td>
                         <td>
                             <input type="submit" value="Cập Nhật" class="btn btn-primary">
-                            <input type="button" value="Hủy" class="btn btn-primary" 
+                            <input type="button" value="Hủy" class="btn" style="color: white; background-color: #3498db; margin-top: 5px" 
                                    onclick="location.href = '${pageContext.request.contextPath}/view/owner/Vehicles?action=list'">
                         </td>
                     </tr>

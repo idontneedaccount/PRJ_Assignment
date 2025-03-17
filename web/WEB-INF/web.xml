@@ -16,6 +16,10 @@
         <servlet-name>VehiclesServlet</servlet-name>
         <servlet-class>Controller.VehiclesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InspectionServlet</servlet-name>
+        <servlet-class>Controller.InspectionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -31,5 +35,9 @@
     <servlet-mapping>
         <servlet-name>VehiclesServlet</servlet-name>
         <url-pattern>/view/owner/Vehicles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InspectionServlet</servlet-name>
+        <url-pattern>/Inspection</url-pattern>
     </servlet-mapping>
 </web-app>

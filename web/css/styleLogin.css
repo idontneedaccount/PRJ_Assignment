@@ -5,15 +5,15 @@
     font-family: Arial, sans-serif;
 }
 body {
-            background-image: url('https://qcvn.com.vn/wp-content/uploads/2019/02/moi-truong-tu-nhien-la-gi1.jpg');
-            background-size: cover; 
-            background-position: center;
-            background-repeat: no-repeat; 
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    background-image: url('https://qcvn.com.vn/wp-content/uploads/2019/02/moi-truong-tu-nhien-la-gi1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .login-container {
     background-color: white;
