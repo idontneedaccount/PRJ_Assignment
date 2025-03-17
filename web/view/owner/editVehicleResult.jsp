@@ -57,8 +57,9 @@
             </div>
 
             <div class="form-group" style="text-align: center;margin-top: 200px;">
-                <input type="button" value="Quay lại danh sách" class="btn btn-primary" 
-                       onclick="location.href = '${pageContext.request.contextPath}/view/owner/Vehicles?action=list'">
+                <div class='form-group'>
+                    <a href='Vehicles?action=list' class='btn btn-primary'>Back to List</a>
+                </div>
             </div>
         </div>
 

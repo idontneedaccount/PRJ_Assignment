@@ -66,6 +66,7 @@ public class VehiclesServlet extends HttpServlet {
             ArrayList<Vehicle> vehicles = new ArrayList<>();
 
             if (action == null || action.equals("list")) {
+                System.out.println("UserID :" + userID);
                 vehicles = VehicleDAO.getVehiclesByOwner(userID);
                 request.setAttribute("vehicles", vehicles);
                 RequestDispatcher rs = request.getRequestDispatcher("vehicleList.jsp");
@@ -86,7 +87,7 @@ public class VehiclesServlet extends HttpServlet {
                 RequestDispatcher rs = request.getRequestDispatcher("editVehicle.jsp");
                 rs.forward(request, response);
             } else if (action.equals("delete")) {
-                int vehicleID = Integer.parseInt(request.getParameter("id"));
+                String vehicleID = request.getParameter("id");
                 System.out.println(vehicleID);
                 boolean success = VehicleDAO.deleteVehicle(vehicleID);
                 try (PrintWriter out = response.getWriter()) {
@@ -117,29 +118,20 @@ public class VehiclesServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         int ownerID = (int) session.getAttribute("userID");
+
         System.out.println(ownerID);
 
         if (action.equals("add")) {
-            System.out.println(ownerID);
             String plateNumber = request.getParameter("plateNumber");
-            System.out.println(plateNumber);
             String brand = request.getParameter("brand");
-            System.out.println(brand);
             String model = request.getParameter("model");
-            System.out.println(model);
             int manufactureYear = Integer.parseInt(request.getParameter("manufactureYear"));
-            System.out.println(manufactureYear);
             String engineNumber = request.getParameter("engineNumber");
-            System.out.println(engineNumber);
 
             Vehicle vehicle = new Vehicle(ownerID, plateNumber, brand, model, manufactureYear, engineNumber);
             boolean success = VehicleDAO.addVehicle(vehicle);
-            System.out.println(success);
             if (success) {
-                Vehicle addedVehicle = VehicleDAO.getVehicleByPlateNumber(plateNumber);
-                request.setAttribute("vehicle", addedVehicle);
-            } else {
-                request.setAttribute("vehicle", null);
+                request.setAttribute("vehicle", vehicle);
             }
             RequestDispatcher rs = request.getRequestDispatcher("addVehicleResult.jsp");
             rs.forward(request, response);

@@ -51,7 +51,7 @@
                                     <td>
                                         <input type="button" value="Delete" class="btn btn-primary"
                                                onclick="if (confirm('Are you sure?'))
-                                                           location.href = '${pageContext.request.contextPath}/view/owner/Vehicles?action=delete&id=${vehicle.vehicleID}'"/>
+                                                           location.href = '${pageContext.request.contextPath}/view/owner/Vehicles?action=delete&id=${vehicle.plateNumber}'"/>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -21,8 +21,8 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(int vehicleID, String plateNumber, String brand, String model, int manufactureYear, String engineNumber) {
-        this.vehicleID = vehicleID;
+    public Vehicle(int ownerID, String plateNumber, String brand, String model, int manufactureYear, String engineNumber) {
+        this.ownerID = ownerID;
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.model = model;

@@ -93,6 +93,7 @@ public class VehicleDAO {
                          """;
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setString(1, plateNumber);
+            System.out.println(plateNumber);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Vehicle vehicle = new Vehicle(
@@ -120,7 +121,6 @@ public class VehicleDAO {
         DBContext db = DBContext.getInstance();
         String sql = "INSERT INTO Vehicles (OwnerID, PlateNumber, Brand, Model, ManufactureYear, EngineNumber) VALUES (?, ?, ?, ?, ?, ?)";
 
-        // Sử dụng try-with-resources để tự động đóng PreparedStatement
         try (Connection conn = db.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setInt(1, vehicle.getOwnerID());
@@ -134,7 +134,7 @@ public class VehicleDAO {
             return rs > 0;
 
         } catch (SQLException e) {
-            System.err.println("SQL Error: " + e.getMessage()); // In chi tiết lỗi SQL
+            System.err.println("SQL Error: " + e.getMessage());
             return false;
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,16 +165,16 @@ public class VehicleDAO {
         return rs > 0;
     }
 
-    public static boolean deleteVehicle(int vehicleID) {
+    public static boolean deleteVehicle(String plateNumber) {
         DBContext db = DBContext.getInstance();
         int rs = 0;
         try {
             String sql = """
                          DELETE FROM Vehicles
-                         WHERE VehicleID = ?
+                         WHERE PlateNumber = ?
                          """;
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
-            statement.setInt(1, vehicleID);
+            statement.setString(1, plateNumber);
             rs = statement.executeUpdate();
         } catch (Exception e) {
             return false;

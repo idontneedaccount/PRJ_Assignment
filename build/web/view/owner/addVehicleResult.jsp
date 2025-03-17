@@ -28,10 +28,6 @@
                     <h4><span>Số Động Cơ:</span> <c:out value="${vehicle.engineNumber}"/></h4>
                 </c:if>
             </div>
-
-            <div class="form-group" style="text-align: center;margin-top: 10px;">
-                <a href="${pageContext.request.contextPath}/Vehicles?action=list" class="btn btn-primary">Quay Lại Danh Sách Phương Tiện</a>
-            </div>
         </div>
 
         <jsp:include page="../common/footer.jsp"/>
