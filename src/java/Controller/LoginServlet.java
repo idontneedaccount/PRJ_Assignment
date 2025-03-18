@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import dao.NotificationDAO;
 import dao.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Notification;
 import model.User;
 
 /**
@@ -72,6 +75,9 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("view/station/dashboard.jsp");
         } else if (user.getRole().equalsIgnoreCase("Inspector")) {
             response.sendRedirect("view/inspector/dashboard.jsp");
+        } else {
+            session.setAttribute("user", user);
+            response.sendRedirect("view/admin/dashboard.jsp");
         }
     }
 
@@ -93,8 +99,11 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("userID", user.getUserID());
-            System.out.println(user.getUserID());
             session.setAttribute("role", user.getRole());
+
+            // Lấy danh sách thông báo từ database
+            ArrayList<Notification> notifications = NotificationDAO.getUnreadNotificationsByUserID(user.getUserID());
+            session.setAttribute("notifications", notifications);
             if (user.getRole().equalsIgnoreCase("owner")) {
                 session.setAttribute("user", user);
                 response.sendRedirect("view/owner/dashboard.jsp");
