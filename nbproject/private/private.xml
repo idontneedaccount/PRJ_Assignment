@@ -4,17 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/dao/DBContext.java</file>
-            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/Controller/InspectionServlet.java</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/owner/scheduleInspection.jsp</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/owner/vehicle.jsp</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/owner/inspectionHistory.jsp</file>
-            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/Controller/VehiclesServlet.java</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/dao/InspectionDAO.java</file>
-            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/dao/StationDAO.java</file>
-            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/owner/deleteResult.jsp</file>
-            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/model/InspectionRecord.java</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/owner/schedule.jsp</file>
+            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/dao/InspectionStationDAO.java</file>
         </group>
     </open-files>
 </project-private>

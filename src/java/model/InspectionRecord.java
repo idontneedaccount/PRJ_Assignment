@@ -4,44 +4,61 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
+/**
+ *
+ * @author PC
+ */
 public class InspectionRecord {
+
     private int recordID;
     private int vehicleID;
-    private int inspectorID;
+    private String vehicleName;
     private int stationID;
-    private Date inspectionDate;
-    private String result;
-    private double co2Emission;
-    private double hcEmission;
-    private String comments;
+    private String stationName;
+    private Timestamp scheduledDate;
+    private String status;
+    private double cO2Emission;
+    private double hCEmission;
+    private String comment;
 
     public InspectionRecord() {
     }
 
-    public InspectionRecord(int recordID, int vehicleID, int stationID, Date inspectionDate, String result, double co2Emission, double hcEmission, String comments) {
+    public InspectionRecord(int recordID, String vehicleName, String stationName, Timestamp scheduledDate, String status, double cO2Emission, double hCEmission, String comment) {
         this.recordID = recordID;
-        this.vehicleID = vehicleID;
-        this.stationID = stationID;
-        this.inspectionDate = inspectionDate;
-        this.result = result;
-        this.co2Emission = co2Emission;
-        this.hcEmission = hcEmission;
-        this.comments = comments;
+        this.vehicleName = vehicleName;
+        this.stationName = stationName;
+        this.scheduledDate = scheduledDate;
+        this.status = status;
+        this.cO2Emission = cO2Emission;
+        this.hCEmission = hCEmission;
+        this.comment = comment;
     }
 
-    
-    public InspectionRecord(int recordID, int vehicleID, int inspectorID, int stationID, Date inspectionDate, String result, double co2Emission, double hcEmission, String comments) {
-        this.recordID = recordID;
-        this.vehicleID = vehicleID;
-        this.inspectorID = inspectorID;
-        this.stationID = stationID;
-        this.inspectionDate = inspectionDate;
-        this.result = result;
-        this.co2Emission = co2Emission;
-        this.hcEmission = hcEmission;
-        this.comments = comments;
+    public double getcO2Emission() {
+        return cO2Emission;
+    }
+
+    public void setcO2Emission(double cO2Emission) {
+        this.cO2Emission = cO2Emission;
+    }
+
+    public double gethCEmission() {
+        return hCEmission;
+    }
+
+    public void sethCEmission(double hCEmission) {
+        this.hCEmission = hCEmission;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public int getRecordID() {
@@ -60,12 +77,12 @@ public class InspectionRecord {
         this.vehicleID = vehicleID;
     }
 
-    public int getInspectorID() {
-        return inspectorID;
+    public String getVehicleName() {
+        return vehicleName;
     }
 
-    public void setInspectorID(int inspectorID) {
-        this.inspectorID = inspectorID;
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
     }
 
     public int getStationID() {
@@ -76,43 +93,28 @@ public class InspectionRecord {
         this.stationID = stationID;
     }
 
-    public Date getInspectionDate() {
-        return inspectionDate;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setInspectionDate(Date inspectionDate) {
-        this.inspectionDate = inspectionDate;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
-    public String getResult() {
-        return result;
+    public Timestamp getScheduledDate() {
+        return scheduledDate;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setScheduledDate(Timestamp scheduledDate) {
+        this.scheduledDate = scheduledDate;
     }
 
-    public double getCo2Emission() {
-        return co2Emission;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCo2Emission(double co2Emission) {
-        this.co2Emission = co2Emission;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public double getHcEmission() {
-        return hcEmission;
-    }
-
-    public void setHcEmission(double hcEmission) {
-        this.hcEmission = hcEmission;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
 }

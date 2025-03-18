@@ -9,7 +9,7 @@ package model;
  * @author PC
  */
 public class InspectionStation {
-    private int stationID;
+    private int stationId;
     private String name;
     private String address;
     private String phone;
@@ -18,20 +18,20 @@ public class InspectionStation {
     public InspectionStation() {
     }
 
-    public InspectionStation(int stationID, String name, String address, String phone, String email) {
-        this.stationID = stationID;
+    public InspectionStation(int stationId, String name, String address, String phone, String email) {
+        this.stationId = stationId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
     }
 
-    public int getStationID() {
-        return stationID;
+    public int getStationId() {
+        return stationId;
     }
 
-    public void setStationID(int stationID) {
-        this.stationID = stationID;
+    public void setStationId(int stationId) {
+        this.stationId = stationId;
     }
 
     public String getName() {
@@ -65,6 +65,5 @@ public class InspectionStation {
     public void setEmail(String email) {
         this.email = email;
     }
-
     
 }
