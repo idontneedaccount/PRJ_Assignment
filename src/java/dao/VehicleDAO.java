@@ -181,4 +181,21 @@ public class VehicleDAO {
         return rs > 0;
     }
 
+    public static ArrayList<String> getAllPlateNumbers() {
+        DBContext db = DBContext.getInstance();
+        ArrayList<String> plateNumbers = new ArrayList<>();
+        String sql = "SELECT PlateNumber FROM Vehicles";
+
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                plateNumbers.add(rs.getString("PlateNumber"));
+            }
+            System.out.println("Danh sách biển số xe: " + plateNumbers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return plateNumbers;
+    }
 }

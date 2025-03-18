@@ -20,7 +20,8 @@ public class Vehicle {
 
     public Vehicle() {
     }
-
+    
+    
     public Vehicle(int ownerID, String plateNumber, String brand, String model, int manufactureYear, String engineNumber) {
         this.ownerID = ownerID;
         this.plateNumber = plateNumber;

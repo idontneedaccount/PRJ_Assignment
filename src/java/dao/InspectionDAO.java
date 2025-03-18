@@ -120,4 +120,37 @@ public class InspectionDAO {
         return records;
     }
 
+    public static InspectionRecord getInspectionByPlate(String plateNumber) {
+        DBContext db = DBContext.getInstance();
+        ArrayList<InspectionRecord> inspectionRecords = new ArrayList<>();
+        try {
+            String sql = """
+                SELECT v.PlateNumber, s.Name AS StationName, i.InspectionDate, i.Result, 
+                       i.CO2Emission, i.HCEmission, i.Comments
+                FROM InspectionRecords i
+                JOIN Vehicles v ON i.VehicleID = v.VehicleID
+                JOIN InspectionStations s ON i.StationID = s.StationID
+                WHERE v.PlateNumber = ? 
+                """;
+
+            PreparedStatement statement = db.getConnection().prepareStatement(sql);
+            statement.setString(1, plateNumber);
+            ResultSet rs = statement.executeQuery();
+            
+            if (rs.next()) {
+                return new InspectionRecord(
+                        plateNumber,
+                        rs.getString("StationName"),
+                        rs.getTimestamp("InspectionDate"),
+                        rs.getString("Result"),
+                        rs.getDouble("CO2Emission"),
+                        rs.getDouble("HCEmission"),
+                        rs.getString("Comments")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

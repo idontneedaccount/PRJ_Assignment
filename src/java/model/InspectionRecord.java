@@ -26,6 +26,16 @@ public class InspectionRecord {
     public InspectionRecord() {
     }
 
+    public InspectionRecord(String vehicleName, String stationName, Timestamp scheduledDate, String status, double cO2Emission, double hCEmission, String comment) {
+        this.vehicleName = vehicleName;
+        this.stationName = stationName;
+        this.scheduledDate = scheduledDate;
+        this.status = status;
+        this.cO2Emission = cO2Emission;
+        this.hCEmission = hCEmission;
+        this.comment = comment;
+    }
+
     public InspectionRecord(int recordID, String vehicleName, String stationName, Timestamp scheduledDate, String status, double cO2Emission, double hCEmission, String comment) {
         this.recordID = recordID;
         this.vehicleName = vehicleName;

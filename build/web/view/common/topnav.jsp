@@ -20,7 +20,7 @@
                 </c:when>
                 <c:when test="${sessionScope.role == 'Police'}">
                 <li><a href="${pageContext.request.contextPath}/view/police/dashboard.jsp">Trang Chủ</a></li>
-                <li><a href="${pageContext.request.contextPath}/view/police/searchVehicle.jsp">Tra Cứu Xe</a></li>
+                <li><a href="${pageContext.request.contextPath}/view/police/SearchVehicle">Tra Cứu Xe</a></li>
                 </c:when>
                 <c:when test="${sessionScope.role == 'Admin'}">
                 <li><a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp">Trang Chủ</a></li>
