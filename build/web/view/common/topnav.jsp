@@ -24,7 +24,7 @@
                 </c:when>
                 <c:when test="${sessionScope.role == 'Admin'}">
                 <li><a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp">Trang Chủ</a></li>
-                <li><a href="${pageContext.request.contextPath}/view/admin/userList.jsp">Quản Lý Người Dùng</a></li>
+                <li><a href="${pageContext.request.contextPath}/view/admin/user.jsp">Quản Lý Người Dùng</a></li>
                 <li><a href="${pageContext.request.contextPath}/view/admin/logs.jsp">Xem Logs</a></li>
                 </c:when>
                 <c:otherwise>

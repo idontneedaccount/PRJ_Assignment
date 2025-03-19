@@ -1,63 +1,62 @@
-<%-- 
-    Document   : editVehicle
-    Created on : Mar 16, 2025, 10:00:00 AM
-    Author     : [Your Name]
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList" %>
-<%@page import="model.Vehicle" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edit Vehicle</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    </head>
-    <body>
-        <jsp:include page="../common/header.jsp"/>
-        <jsp:include page="../common/topnav.jsp"/>
-        <jsp:useBean id="vehicleToEdit" class="model.Vehicle" scope="request"> </jsp:useBean>
-            <div class="container">
-                <h2 class="form-title">Chỉnh Sửa Phương Tiện</h2>
-                <form action="Vehicles" method="POST">
-                    <input type="hidden" name="action" value="edit">
-                    <input type="hidden" name="vehicleID" value="<jsp:getProperty name="vehicleToEdit" property="vehicleID" />">
-                <table>
-                    <tr>
-                        <td><label class="form-label">Mã Số Xe</label></td>
-                        <td><input type="text" name="vehicleID" value="<jsp:getProperty name="vehicleToEdit" property="vehicleID"  /> " readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label class="form-label">Biển Số:</label></td>
-                        <td><input type="text" name="plateNumber" value="<jsp:getProperty name="vehicleToEdit" property="plateNumber" />" required></td>
-                    </tr>
-                    <tr>
-                        <td><label class="form-label">Hãng Xe:</label></td>
-                        <td><input type="text" name="brand" value="<jsp:getProperty name="vehicleToEdit" property="brand" />" required></td>
-                    </tr>
-                    <tr>
-                        <td><label class="form-label">Mẫu Xe:</label></td>
-                        <td><input type="text" name="model" value="<jsp:getProperty name="vehicleToEdit" property="model" />" required></td>
-                    </tr>
-                    <tr>
-                        <td><label class="form-label">Năm Sản Xuất:</label></td>
-                        <td><input type="number" name="manufactureYear" value="<jsp:getProperty name="vehicleToEdit" property="manufactureYear" />" required></td>
-                    </tr>
-                    <tr>
-                        <td><label class="form-label">Số Động Cơ:</label></td>
-                        <td><input type="text" name="engineNumber" value="<jsp:getProperty name="vehicleToEdit" property="engineNumber" />" required></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" value="Cập Nhật" class="btn btn-primary">
-                            <input type="button" value="Hủy" class="btn" style="color: white; background-color: #3498db; margin-top: 5px" 
-                                   onclick="location.href = '${pageContext.request.contextPath}/view/owner/Vehicles?action=list'">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-        <jsp:include page="../common/footer.jsp" />
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh Sửa Người Dùng</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+</head>
+<body>
+    <jsp:include page="../common/header.jsp"/>
+    <jsp:include page="../common/topnav.jsp"/>
+
+    <div class="container">
+        <h2 class="form-title">Chỉnh Sửa Người Dùng</h2>
+        <form action="Users" method="POST">
+            <input type="hidden" name="action" value="edit">
+            <input type="hidden" name="userID" value="<c:out value='${user.userID}'/>">
+            
+            <div class="form-group">
+                <label class="form-label">Họ và Tên:</label>
+                <input type="text" name="fullName" value="<c:out value='${user.fullName}'/>" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Email:</label>
+                <input type="email" name="email" value="<c:out value='${user.email}'/>" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Vai Trò:</label>
+                <select name="role" required>
+                    <option value="Owner" ${user.role == 'Owner' ? 'selected' : ''}>Chủ Phương Tiện</option>
+                    <option value="Inspector" ${user.role == 'Inspector' ? 'selected' : ''}>Công Nhân Kiểm Tra</option>
+                    <option value="Station" ${user.role == 'Station' ? 'selected' : ''}>Cơ Sở Kiểm Định</option>
+                    <option value="Police" ${user.role == 'Police' ? 'selected' : ''}>Cảnh Sát Giao Thông</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Số Điện Thoại:</label>
+                <input type="text" name="phone" value="<c:out value='${user.phone}'/>" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Địa Chỉ:</label>
+                <input type="text" name="address" value="<c:out value='${user.address}'/>" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                <button type="button" class="btn" style="color: white; background-color: #3498db; margin-top: 5px" 
+                        onclick="location.href = 'Users?action=list'">Hủy</button>
+            </div>
+        </form>
+    </div>
+
+    <jsp:include page="../common/footer.jsp"/>
+</body>
 </html>
