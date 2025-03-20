@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/model/User.java</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/src/java/Controller/LoginServlet.java</file>
+            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/owner/dashboard.jsp</file>
+            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/inspector/dashboard.jsp</file>
+            <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/police/dashboard.jsp</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/station/dashboard.jsp</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/view/station/reports.jsp</file>
             <file>file:/C:/Users/PC/Downloads/PRJ/Project_PRJ301/web/WEB-INF/web.xml</file>

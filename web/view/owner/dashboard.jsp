@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="vehicle-form div2">
-                    <h2>Chào Mừng Chủ Phương Tiện</h2>
+                    <h2>Chào Mừng ${sessionScope.user.fullName}</h2>
                     <p><strong>Xin chào: </strong> ${sessionScope.user.fullName}</p>
                     <p><strong>ID: </strong> ${sessionScope.user.userID}</p>
                     <p><strong>Email: </strong> ${sessionScope.user.email}</p>

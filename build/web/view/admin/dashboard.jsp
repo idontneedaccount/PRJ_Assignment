@@ -16,7 +16,7 @@
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/topnav.jsp" />
         <main class="container">
-            <h2 class="form-title">Chào Mừng Quản Trị Viên</h2>
+            <h2 class="form-title">Chào Mừng ${sessionScope.user.fullName}</h2>
             <div class="vehicle-form">
                 <h2>Chào Mừng Admin</h2>
                 <p><strong>Xin chào: </strong> ${sessionScope.user.fullName}</p>

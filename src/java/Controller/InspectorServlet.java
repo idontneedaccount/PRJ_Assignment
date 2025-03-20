@@ -1,7 +1,7 @@
 package Controller;
 
-import dao.InspectorDAO;
 import dao.VehicleDAO;
+import dao.InspectorDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

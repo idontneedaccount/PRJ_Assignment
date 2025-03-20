@@ -12,7 +12,7 @@
         <jsp:include page="../common/topnav.jsp" />
         <main class="container">
             <div class="vehicle-form">
-                <h2>Chào Mừng Cảnh Sát</h2>
+                <h2>Chào Mừng ${sessionScope.user.fullName}</h2>
                 <p><strong>Xin chào: </strong> ${sessionScope.user.fullName}</p>
                 <p><strong>ID: </strong> ${sessionScope.user.userID}</p>
                 <p><strong>Email: </strong> ${sessionScope.user.email}</p>

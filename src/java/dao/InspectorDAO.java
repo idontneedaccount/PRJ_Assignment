@@ -1,3 +1,4 @@
+
 package dao;
 
 import java.sql.PreparedStatement;
@@ -67,7 +68,8 @@ public class InspectorDAO {
         String sql = """
             INSERT INTO InspectionRecords (VehicleID, StationID, InspectorID, InspectionDate, Result, CO2Emission, HCEmission, Comments) 
             VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?)""";
-        try (PreparedStatement statement = db.getConnection().prepareStatement(sql)) {
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setInt(1, vehicleId);
             statement.setInt(2, stationId);
             statement.setInt(3, inspectorId);
