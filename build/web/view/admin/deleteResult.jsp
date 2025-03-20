@@ -27,19 +27,19 @@
                             </tr>
                             <tr>
                                 <td>ID Người Dùng:</td>
-                                <td>${user.userID}</td>
+                                <td>${userDelete.userID}</td>
                             </tr>
                             <tr>
                                 <td>Họ và Tên:</td>
-                                <td>${user.fullName}</td>
+                                <td>${userDelete.fullName}</td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>${user.email}</td>
+                                <td>${userDelete.email}</td>
                             </tr>
                             <tr>
                                 <td>Vai Trò:</td>
-                                <td>${user.role}</td>
+                                <td>${userDelete.role}</td>
                             </tr>
                         </table>
                     </c:when>

@@ -67,6 +67,7 @@ public class UserServlet extends HttpServlet {
         } else {
             response.setContentType("text/html;charset=UTF-8");
             String action = request.getParameter("action");
+            System.out.println("action"+ action);
             ArrayList<User> users = new ArrayList<>();
 
             if (action == null || action.equals("list")) {
@@ -89,6 +90,9 @@ public class UserServlet extends HttpServlet {
             } else if (action.equals("delete")) {
                 String email = request.getParameter("email");
                 boolean success = UserDAO.deleteUser(email);
+                System.out.println("success" + success);
+                User user = UserDAO.getUserByEmail(email);
+                request.setAttribute("userDelete", user);
                 request.setAttribute("success", success);
                 RequestDispatcher rs = request.getRequestDispatcher("deleteResult.jsp");
                 rs.forward(request, response);
@@ -105,7 +109,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-
+        System.out.println("action" + action);
         if (action.equals("edit")) {
             int userID = Integer.parseInt(request.getParameter("userID"));
             String fullName = request.getParameter("fullName");
@@ -114,8 +118,9 @@ public class UserServlet extends HttpServlet {
             String role = request.getParameter("role");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-            User user = new User(fullName, email, password, role, phone, address);
+            User user = new User(userID,fullName, email, password, role, phone, address);
             boolean success = UserDAO.updateUser(user);
+            System.out.println(success);
             request.setAttribute("user", user);
             RequestDispatcher rs = request.getRequestDispatcher("editUserResult.jsp");
             rs.forward(request, response);
@@ -133,10 +138,10 @@ public class UserServlet extends HttpServlet {
                 boolean success = UserDAO.addUser(user);
 
                 if (success) {
-                    response.sendRedirect("view/admin/Users?action=list");
+                    response.sendRedirect("Users?action=list");
                 } else {
                     request.setAttribute("errorMessage", "Thêm người dùng thất bại!");
-                    request.getRequestDispatcher("view/common/error.jsp").forward(request, response);
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
             }
         }

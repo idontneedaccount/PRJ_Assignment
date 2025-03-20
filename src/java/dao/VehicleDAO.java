@@ -5,7 +5,9 @@
  */
 package dao;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Vehicle;
 
@@ -121,8 +123,8 @@ public class VehicleDAO {
         DBContext db = DBContext.getInstance();
         String sql = "INSERT INTO Vehicles (OwnerID, PlateNumber, Brand, Model, ManufactureYear, EngineNumber) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = db.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
-
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setInt(1, vehicle.getOwnerID());
             statement.setString(2, vehicle.getPlateNumber());
             statement.setString(3, vehicle.getBrand());

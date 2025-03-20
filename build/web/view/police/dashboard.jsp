@@ -12,14 +12,14 @@
         <jsp:include page="../common/topnav.jsp" />
         <main class="container">
             <div class="vehicle-form">
-                <h2>Chào Mừng Chủ Phương Tiện</h2>
+                <h2>Chào Mừng Cảnh Sát</h2>
                 <p><strong>Xin chào: </strong> ${sessionScope.user.fullName}</p>
                 <p><strong>ID: </strong> ${sessionScope.user.userID}</p>
                 <p><strong>Email: </strong> ${sessionScope.user.email}</p>
-                <p><strong>Vai trò: </strong> Chủ Phương Tiện</p>
+                <p><strong>Vai trò: </strong> Cảnh sát</p>
                 <p><strong>Số điện thoại: </strong> ${sessionScope.user.phone}</p>
                 <p><strong>Địa chỉ: </strong> ${sessionScope.user.address}</p>
-                <p>Chào mừng bạn đến với hệ thống quản lý phương tiện. Hãy kiểm tra thông báo dưới đây để cập nhật thông tin mới nhất.</p>
+                <p>Chào mừng bạn đến với hệ thống quản lý phương tiện.</p>
             </div>
         </main>
         <jsp:include page="../common/footer.jsp" />

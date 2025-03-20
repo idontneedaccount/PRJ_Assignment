@@ -19,8 +19,8 @@
             <div class="vehicle-form">
                 <h2 class="form-title">Chỉnh Sửa Thông Tin Người Dùng</h2>
                 <jsp:useBean id="user" class="model.User" scope="request" />
-                <form action="${pageContext.request.contextPath}/admin" method="post">
-                    <input type="hidden" name="action" value="update">
+                <form action="Users" method="post">
+                    <input type="hidden" name="action" value="edit">
                     <input type="hidden" name="userID" value="${userToEdit.userID}">
                     <div class="form-group">
                         <label class="form-label" for="fullName">Họ và Tên:</label>

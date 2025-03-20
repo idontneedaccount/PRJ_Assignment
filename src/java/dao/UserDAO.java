@@ -22,7 +22,7 @@ public class UserDAO {
         try {
             String sql = """
                       SELECT * FROM Users
-                      WHERE UserID = ?
+                      WHERE UserID = ? AND isActive = 1
                       """;
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setInt(1, userID);
@@ -54,7 +54,7 @@ public class UserDAO {
         try {
             String sql = """
                           SELECT * FROM Users
-                          WHERE Email = ? AND Password = ?
+                          WHERE Email = ? AND Password = ? AND isActive = 1
                           """; // (2)
             PreparedStatement statement = db.getConnection().prepareStatement(sql); // (3)
             statement.setString(1, email);
@@ -81,9 +81,41 @@ public class UserDAO {
         }
     }
 
+    public static User getUserByEmail(String email) {
+        DBContext db = DBContext.getInstance();
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            String sql = """
+                          SELECT * FROM Users
+                          WHERE Email = ? AND isActive = 1
+                          """; // (2)
+            PreparedStatement statement = db.getConnection().prepareStatement(sql); // (3)
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("UserID"),
+                        rs.getString("FullName"),
+                        rs.getString("Email"),
+                        rs.getString("Password"),
+                        rs.getString("Role"),
+                        rs.getString("Phone"),
+                        rs.getString("Address"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        if (users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
+    }
+
     public static boolean addUser(User user) {
         DBContext db = DBContext.getInstance();
-        String sql = "INSERT INTO Users (FullName, Email, Password, Role, Phone, Address) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Users (FullName, Email, Password, Role, Phone, Address, isActive) VALUES (?,?,?,?,?,?,1)";
         try (PreparedStatement statement = db.getConnection().prepareStatement(sql)) {
             statement.setString(1, user.getFullName());
             statement.setString(2, user.getEmail());
@@ -95,6 +127,7 @@ public class UserDAO {
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
+            System.out.println("Error" + e.getMessage());
             return false;
         }
     }
@@ -117,7 +150,7 @@ public class UserDAO {
         DBContext db = DBContext.getInstance();
         ArrayList<User> users = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Users";
+            String sql = "SELECT * FROM Users WHERE isActive = 1";
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -143,7 +176,7 @@ public class UserDAO {
             String sql = """
                          UPDATE Users
                          SET FullName = ?, Email = ?, Password = ?, Role = ?, Phone = ?, Address = ?
-                         WHERE UserID = ?
+                         WHERE UserID = ? AND isActive = 1
                          """;
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setString(1, user.getFullName());
@@ -156,6 +189,7 @@ public class UserDAO {
             int rowsUpdated = statement.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException e) {
+            System.out.println("SQL Error : " + e.getMessage());
             return false;
         }
     }
@@ -163,13 +197,15 @@ public class UserDAO {
     public static boolean deleteUser(String email) {
         DBContext db = DBContext.getInstance();
         try {
-            String sql = "DELETE FROM Users WHERE Email = ?";
+            String sql = "UPDATE Users SET isActive = 0 WHERE Email = ?";
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setString(1, email);
-            int rowsDeleted = statement.executeUpdate();
-            return rowsDeleted > 0;
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
         } catch (SQLException e) {
+            System.out.println("SQL Error : " + e.getMessage());
             return false;
         }
     }
+
 }

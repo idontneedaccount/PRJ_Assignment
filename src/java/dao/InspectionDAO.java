@@ -6,7 +6,10 @@ package dao;
 
 import java.util.ArrayList;
 import model.*;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 /**
  *
@@ -40,23 +43,23 @@ public class InspectionDAO {
 
     public static InspectionRecord addInspection(int vehicleId, int stationId, Timestamp dateTime) {
         DBContext db = DBContext.getInstance();
-        String insertSql = """
+        String sql = """
             INSERT INTO InspectionRecords (VehicleID, StationID, InspectorID, InspectionDate, Result, CO2Emission, HCEmission, Comments)
             VALUES (?, ?, 1, ?, 'Pending', 0, 0, NULL);
             """;
 
-        try (PreparedStatement insertStmt = db.getConnection().prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
-            insertStmt.setInt(1, vehicleId);
-            insertStmt.setInt(2, stationId);
-            insertStmt.setTimestamp(3, dateTime);
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement(sql);
+            statement.setInt(1, vehicleId);
+            statement.setInt(2, stationId);
+            statement.setTimestamp(3, dateTime);
 
-            int rowsInserted = insertStmt.executeUpdate();
+            int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                ResultSet rs = insertStmt.getGeneratedKeys();
+                ResultSet rs = statement.getGeneratedKeys();
                 if (rs.next()) {
                     int recordId = rs.getInt(1);
 
-                    // Truy vấn lại để lấy thông tin chi tiết từ bảng Vehicles và InspectionStations
                     String selectSql = """
                         SELECT ir.RecordID, v.PlateNumber, s.Name, ir.InspectionDate, ir.Result, ir.CO2Emission, ir.HCEmission, ir.Comments
                         FROM InspectionRecords ir
@@ -136,7 +139,7 @@ public class InspectionDAO {
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setString(1, plateNumber);
             ResultSet rs = statement.executeQuery();
-            
+
             if (rs.next()) {
                 return new InspectionRecord(
                         plateNumber,

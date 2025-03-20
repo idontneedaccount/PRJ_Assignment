@@ -11,7 +11,8 @@
                 </c:when>
                 <c:when test="${sessionScope.role == 'Inspector'}">
                 <li><a href="${pageContext.request.contextPath}/view/inspector/dashboard.jsp">Trang Chủ</a></li>
-                <li><a href="${pageContext.request.contextPath}/view/inspector/scheduledInspections.jsp">Lịch Kiểm Định</a></li>
+                <li><a href="${pageContext.request.contextPath}/view/inspector/Inspector">Kiểm Định</a></li>
+                <li><a href="${pageContext.request.contextPath}/view/inspector/Inspector?action=viewHistory">Lịch Kiểm Định</a></li>
                 </c:when>
                 <c:when test="${sessionScope.role == 'Station'}">
                 <li><a href="${pageContext.request.contextPath}/view/station/dashboard.jsp">Trang Chủ</a></li>
@@ -25,7 +26,6 @@
                 <c:when test="${sessionScope.role == 'Admin'}">
                 <li><a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp">Trang Chủ</a></li>
                 <li><a href="${pageContext.request.contextPath}/view/admin/user.jsp">Quản Lý Người Dùng</a></li>
-                <li><a href="${pageContext.request.contextPath}/view/admin/logs.jsp">Xem Logs</a></li>
                 </c:when>
                 <c:otherwise>
                 <li><a href="${pageContext.request.contextPath}/home">Trang Chủ</a></li>

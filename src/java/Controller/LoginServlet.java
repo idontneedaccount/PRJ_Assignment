@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import dao.InspectionStationDAO;
 import dao.NotificationDAO;
 import dao.UserDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import model.InspectionStation;
 import model.Notification;
 import model.User;
 
@@ -72,7 +74,7 @@ public class LoginServlet extends HttpServlet {
         } else if (user.getRole().equalsIgnoreCase("Police")) {
             response.sendRedirect("view/police/dashboard.jsp");
         } else if (user.getRole().equalsIgnoreCase("Station")) {
-            response.sendRedirect("view/station/dashboard.jsp");
+            response.sendRedirect("/view/station/DashBoard");
         } else if (user.getRole().equalsIgnoreCase("Inspector")) {
             response.sendRedirect("view/inspector/dashboard.jsp");
         } else {
@@ -95,8 +97,11 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = UserDAO.getUserByEmailAndPassword(email, password);
+        int stationId = 1;
+        InspectionStation station = InspectionStationDAO.getStationById(stationId);
         if (user != null) {
             HttpSession session = request.getSession();
+            session.setAttribute("station", station);
             session.setAttribute("user", user);
             session.setAttribute("userID", user.getUserID());
             session.setAttribute("role", user.getRole());

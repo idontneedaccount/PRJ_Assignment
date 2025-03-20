@@ -28,6 +28,10 @@
                         <td>${user.email}</td>
                     </tr>
                     <tr>
+                        <td><strong>Password:</strong></td>
+                        <td>${user.password}</td>
+                    </tr>
+                    <tr>
                         <td><strong>Vai Trò:</strong></td>
                         <td>${user.role}</td>
                     </tr>
@@ -41,13 +45,13 @@
                     </tr>
                 </table>
                 <div class="actions">
-                    <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/view/admin/Users?action=edit&id=${user.userID}'">Chỉnh Sửa</button>
-                    <button class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/view/admin/Users?action=list'">Quay Lại</button>
+                    <button class="btn btn-primary" onclick="location.href = '${pageContext.request.contextPath}/view/admin/Users?action=edit&id=${user.userID}'">Chỉnh Sửa</button>
+                    <button class="btn btn-secondary" onclick="location.href = '${pageContext.request.contextPath}/view/admin/Users?action=list'">Quay Lại</button>
                 </div>
             </c:if>
             <c:if test="${empty user}">
                 <p>Không tìm thấy thông tin người dùng.</p>
-                <button class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/view/admin/Users?action=list'">Quay Lại</button>
+                <button class="btn btn-secondary" onclick="location.href = '${pageContext.request.contextPath}/view/admin/Users?action=list'">Quay Lại</button>
             </c:if>
         </main>
         <jsp:include page="../common/footer.jsp"/>
