@@ -21,20 +21,6 @@
                 <p><strong>Địa chỉ: </strong> ${sessionScope.user.address}</p>
                 <p>Chào mừng bạn đến với hệ thống quản lý phương tiện. Hãy kiểm tra thông báo dưới đây để cập nhật thông tin mới nhất.</p>
             </div>
-            <div class="vehicle-form">
-                <c:choose>
-                    <c:when test="${empty station}">
-                        <p style="color: red;">Không tìm thấy thông tin cơ sở kiểm định!</p>
-                    </c:when>
-                    <c:otherwise>
-                        <h2>Thông tin cơ sở kiểm định</h2>
-                        <p><strong>Tên:</strong> ${sessionScope.station.name}</p>
-                        <p><strong>Địa chỉ:</strong> ${sessionScope.station.address}</p>
-                        <p><strong>Số điện thoại:</strong> ${sessionScope.station.phone}</p>
-                        <p><strong>Email:</strong> ${sessionScope.station.email}</p>
-                    </c:otherwise>
-                </c:choose>
-            </div>
         </main>
         <jsp:include page="../common/footer.jsp" />
     </body>

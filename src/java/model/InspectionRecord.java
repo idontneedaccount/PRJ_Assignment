@@ -22,6 +22,7 @@ public class InspectionRecord {
     private double cO2Emission;
     private double hCEmission;
     private String comment;
+    private boolean success;
 
     public InspectionRecord() {
     }
@@ -36,13 +37,14 @@ public class InspectionRecord {
         this.comment = comment;
     }
 
-    public InspectionRecord(int recordID, String vehicleName, Timestamp scheduledDate, String status, double cO2Emission, double hCEmission) {
+    public InspectionRecord(int recordID, String vehicleName, Timestamp scheduledDate, String status, double cO2Emission, double hCEmission,boolean success) {
         this.recordID = recordID;
         this.vehicleName = vehicleName;
         this.scheduledDate = scheduledDate;
         this.status = status;
         this.cO2Emission = cO2Emission;
         this.hCEmission = hCEmission;
+        this.success = success;
     }
 
     public InspectionRecord(String vehicleName, String stationName, Timestamp scheduledDate, String status, double cO2Emission, double hCEmission, String comment) {
@@ -66,6 +68,15 @@ public class InspectionRecord {
         this.comment = comment;
     }
 
+    public boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    
     public double getcO2Emission() {
         return cO2Emission;
     }

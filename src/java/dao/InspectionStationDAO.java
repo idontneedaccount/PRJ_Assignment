@@ -34,7 +34,7 @@ public class InspectionStationDAO {
 
     public static int getPassCount() {
         DBContext db = DBContext.getInstance();
-        String sql = "SELECT COUNT(*) FROM InspectionRecords WHERE Result = 'Đạt'";
+        String sql = "SELECT COUNT(*) FROM InspectionRecords WHERE Result = 'Pass'";
         try (PreparedStatement statement = db.getConnection().prepareStatement(sql); ResultSet rs = statement.executeQuery()) {
             if (rs.next()) {
                 return rs.getInt(1);
@@ -47,7 +47,7 @@ public class InspectionStationDAO {
 
     public static int getFailCount() {
         DBContext db = DBContext.getInstance();
-        String sql = "SELECT COUNT(*) FROM InspectionRecords WHERE Result = 'Không đạt'";
+        String sql = "SELECT COUNT(*) FROM InspectionRecords WHERE Result = 'Fail'";
         try (PreparedStatement statement = db.getConnection().prepareStatement(sql); ResultSet rs = statement.executeQuery()) {
             if (rs.next()) {
                 return rs.getInt(1);

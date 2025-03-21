@@ -28,8 +28,8 @@
                 <div class="form-group">
                     <label for="status">Trạng thái:</label>
                     <select id="status" name="status" required>
-                        <option value="Đạt">Đạt</option>
-                        <option value="Không đạt">Không đạt</option>
+                        <option value="Pass">Đạt</option>
+                        <option value="Fail">Không đạt</option>
                     </select>
                 </div>
                 <div class="form-group">

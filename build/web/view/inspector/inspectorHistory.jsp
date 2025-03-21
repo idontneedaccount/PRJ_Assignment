@@ -19,6 +19,7 @@
                     <th>Kết quả</th>
                     <th>CO2 (g/km)</th>
                     <th>HC (g/km)</th>
+                    <th>Trạng Thái</th>
                 </tr>
                 <c:forEach var="record" items="${inspectionHistory}">
                     <tr>
@@ -28,6 +29,7 @@
                         <td>${record.status}</td>
                         <td>${record.cO2Emission}</td>
                         <td>${record.hCEmission}</td>
+                        <td>${record.success ? "Thành công" : "Thất bại"}</td>
                     </tr>
                 </c:forEach>
             </table>

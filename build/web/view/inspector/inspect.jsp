@@ -52,8 +52,8 @@
                                             <div>
                                                 <label for="result_${vehicle.vehicleID}">Kết quả:</label>
                                                 <select name="result" id="result_${vehicle.vehicleID}" required>
-                                                    <option value="Đạt">PASS</option>
-                                                    <option value="Không đạt">FAIL</option>
+                                                    <option value="Pass">Đạt</option>
+                                                    <option value="Fail">Không Đạt</option>
                                                 </select>
                                             </div>
 

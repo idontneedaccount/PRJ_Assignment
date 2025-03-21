@@ -156,4 +156,21 @@ public class InspectionDAO {
         }
         return null;
     }
+
+    public boolean approveInspection(int recordId) throws SQLException {
+        DBContext db = DBContext.getInstance();
+        String sql = "UPDATE inspection_registration SET is_active = 1 WHERE record_id = ?";
+
+        try {
+            
+            PreparedStatement statement = db.getConnection().prepareStatement(sql);
+            statement.setInt(1, recordId);
+            int rowsUpdated = statement.executeUpdate();
+
+            return rowsUpdated > 0;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

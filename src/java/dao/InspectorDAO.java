@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.PreparedStatement;
@@ -10,7 +9,7 @@ import model.InspectionRecord;
 import model.Vehicle;
 
 public class InspectorDAO {
-    
+
     public static List<Vehicle> getPendingInspections() {
         DBContext db = DBContext.getInstance();
         List<Vehicle> pendingVehicles = new ArrayList<>();
@@ -34,16 +33,16 @@ public class InspectorDAO {
         }
         return pendingVehicles;
     }
-    
+
     public static List<InspectionRecord> getInspectionHistory() {
         DBContext db = DBContext.getInstance();
         List<InspectionRecord> history = new ArrayList<>();
         try {
             String sql = """
-                SELECT ir.RecordID, v.PlateNumber, ir.InspectionDate, ir.Result, ir.CO2Emission, ir.HCEmission 
-                FROM InspectionRecords ir 
-                JOIN Vehicles v ON ir.VehicleID = v.VehicleID 
-                ORDER BY ir.InspectionDate DESC""";
+                SELECT ir.RecordID, v.PlateNumber, ir.InspectionDate, ir.Result, ir.CO2Emission, ir.HCEmission ,ir.isActive
+                                FROM InspectionRecords ir 
+                                JOIN Vehicles v ON ir.VehicleID = v.VehicleID 
+                                ORDER BY ir.InspectionDate DESC""";
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -53,7 +52,8 @@ public class InspectorDAO {
                         rs.getTimestamp("InspectionDate"),
                         rs.getString("Result"),
                         rs.getDouble("CO2Emission"),
-                        rs.getDouble("HCEmission")
+                        rs.getDouble("HCEmission"),
+                        rs.getBoolean("isActive")
                 );
                 history.add(record);
             }
@@ -62,12 +62,13 @@ public class InspectorDAO {
         }
         return history;
     }
-    
+
     public static boolean addInspectionRecord(int vehicleId, int stationId, int inspectorId, double co2Emission, double hcEmission, String result, String comments) {
         DBContext db = DBContext.getInstance();
         String sql = """
-            INSERT INTO InspectionRecords (VehicleID, StationID, InspectorID, InspectionDate, Result, CO2Emission, HCEmission, Comments) 
-            VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?)""";
+            INSERT INTO InspectionRecords (VehicleID, StationID, InspectorID, InspectionDate, Result, CO2Emission, HCEmission, Comments,isActive) 
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?,0)
+                     """;
         try {
             PreparedStatement statement = db.getConnection().prepareStatement(sql);
             statement.setInt(1, vehicleId);
